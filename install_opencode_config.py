@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
-Install opencode.jsonc and agents/esek.md from this repo to user's config via copying.
+Install opencode-template.jsonc and agents/esek.md from this repo to user's config via copying.
 
 This script copies the files from this repository to the user's opencode config directory,
 and prompts for the API key which is written to the opencode.jsonc config file.
 """
 
 import sys
+import os
 from pathlib import Path
 
 
@@ -46,7 +47,7 @@ def get_repo_files() -> tuple[Path, Path]:
     """Get paths to repo's opencode.jsonc and agents/esek.md files."""
     repo_root = Path(__file__).parent
     
-    opencode_jsonc = repo_root / "opencode.jsonc"
+    opencode_jsonc = repo_root / "opencode-template.jsonc"
     esek_md = repo_root / "agents" / "esek.md"
     
     if not opencode_jsonc.exists():
@@ -70,20 +71,20 @@ def install_files(user_config_dir: Path, repo_opencode_jsonc: Path, repo_esek_md
     agents_dir = user_config_dir / "agents"
     agents_dir.mkdir(exist_ok=True)
     
-    # Install opencode.jsonc
+    # Ask once at the start if files should be overwritten
     user_opencode = user_config_dir / "opencode.jsonc"
+    user_esek = agents_dir / "esek.md"
+    override = True
+    if user_opencode.exists() or user_esek.exists():
+        override = input("Some files already exist. Overwrite? (y/N): ").strip().lower() in ('y', 'yes')
+
+    if not override:
+        print("Skipping file installation")
+        return
+    
+    # Install opencode.jsonc
     if user_opencode.exists():
-        print(f"\n⚠️  {user_opencode} already exists!")
-        try:
-            confirm = input("Do you want to overwrite it? (y/N): ").strip().lower()
-            if confirm != 'y':
-                print("Skipping opencode.jsonc installation")
-                return
-        except EOFError:
-            # Non-interactive mode, assume yes
-            print("Overwriting existing file (non-interactive mode)")
-        else:
-            print(f"Overwriting existing {user_opencode}")
+        print(f"\nOverwriting existing {user_opencode}")
     else:
         print(f"\nCopying opencode.jsonc to {user_opencode}")
     
@@ -95,7 +96,25 @@ def install_files(user_config_dir: Path, repo_opencode_jsonc: Path, repo_esek_md
     print("\n" + "─"*70)
     print("API Key Setup")
     print("─"*70)
-    api_key = input("Enter your OPENCODE_API_KEY: ").strip()
+    # Check if .env file exists and read OPENCODE_API_KEY from it
+    api_key = None
+    env_path = os.path.join(os.path.dirname(user_opencode), '.env')
+    if os.path.exists(env_path):
+        with open(env_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                if line.strip().startswith('OPENCODE_API_KEY='):
+                    api_key = line.strip().split('=', 1)[1]
+                    break
+    
+    # If not found in .env or .env doesn't exist, prompt user
+    if not api_key:
+        api_key = input("Enter your OPENCODE_API_KEY: ").strip()
+        if api_key:
+            # Append to .env file
+            with open(env_path, 'a', encoding='utf-8') as f:
+                f.write(f"OPENCODE_API_KEY={api_key}\n")
+            print(f"✅ Saved API key to {env_path}")
+    
     if api_key:
         # Read the JSON file, update the API key, and write back
         import json
@@ -111,21 +130,10 @@ def install_files(user_config_dir: Path, repo_opencode_jsonc: Path, repo_esek_md
     # Install agents/esek.md
     user_esek = agents_dir / "esek.md"
     if user_esek.exists():
-        print(f"\n⚠️  {user_esek} already exists!")
-        try:
-            confirm = input("Do you want to overwrite it? (y/N): ").strip().lower()
-            if confirm != 'y':
-                print("Skipping agents/esek.md installation")
-                return
-        except EOFError:
-            # Non-interactive mode, assume yes
-            print("Overwriting existing file (non-interactive mode)")
-        else:
-            print(f"Overwriting existing {user_esek}")
-            shutil.copy2(repo_esek_md, user_esek)
+        print(f"\nOverwriting existing {user_esek}")
     else:
         print(f"Copying agents/esek.md to {user_esek}")
-        shutil.copy2(repo_esek_md, user_esek)
+    shutil.copy2(repo_esek_md, user_esek)
     
     print("\n✅ Successfully installed opencode configuration files")
 
