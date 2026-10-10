@@ -1,0 +1,36 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "default_agent": "esek",
+  "providers": {
+    "esek": {
+      "name": "E-sektionen",
+      "package": "@opencode/ai/providers/openai-compatible",
+      "settings": {
+        "baseURL": "https://ai.esek.se/v1",
+        "apiKey": "don't leak the token:)"
+      },
+      "models": {
+        "small-64k": {
+          "modelID": "mistral-small",
+          "name": "esek: Mistral Small 4 (limited context)",
+          "limit": { "context": 64000, "output": 16384 }
+        },
+        "small": {
+          "modelID": "mistral-small",
+          "name": "esek: Mistral Small 4",
+          "limit": { "context": 256000, "output": 16384 }
+        },
+        "large-256k": {
+          "modelID": "mistral-large",
+          "name": "esek: Mistral Large 4 (limited context)",
+          "limit": { "context": 256000, "output": 16384 }
+        },
+        "large": {
+          "modelID": "mistral-large",
+          "name": "esek: Mistral Large 4",
+          "limit": { "context": 1000000, "output": 16384 }
+        }
+      }
+    }
+  }
+}
