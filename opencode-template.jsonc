@@ -7,30 +7,48 @@
       "package": "@opencode/ai/providers/openai-compatible",
       "settings": {
         "baseURL": "https://ai.esek.se/v1",
-        "apiKey": "don't leak the token:)"
+        "apiKey": "<token goes here>"
       },
       "models": {
-        "small-64k": {
+        "small-ctx-small": {
           "modelID": "mistral-small",
           "name": "esek: Mistral Small 4 (limited context)",
-          "limit": { "context": 64000, "output": 16384 }
+          "limit": { "context": 64000, "output": 16384 },
+          "settings": {
+            "reasoningEffort": "low"
+          }
         },
         "small": {
           "modelID": "mistral-small",
           "name": "esek: Mistral Small 4",
-          "limit": { "context": 256000, "output": 16384 }
+          "limit": { "context": 256000, "output": 16384 },
+          "settings": {
+            "reasoningEffort": "high"
+          }
         },
-        "large-256k": {
+        "large-ctx-small": {
           "modelID": "mistral-large",
           "name": "esek: Mistral Large 4 (limited context)",
-          "limit": { "context": 256000, "output": 16384 }
+          "limit": { "context": 128000, "output": 16384 },
+          "settings": {
+            "reasoningEffort": "low"
+          }
         },
         "large": {
           "modelID": "mistral-large",
           "name": "esek: Mistral Large 4",
-          "limit": { "context": 1000000, "output": 16384 }
+          "limit": { "context": 1000000, "output": 16384 },
+          "settings": {
+            "reasoningEffort": "medium"
+          }
         }
       }
     }
+  },
+  "experimental": {
+    "policies": [
+      { "action": "provider.use", "resource": "*", "effect": "deny" },
+      { "action": "provider.use", "resource": "esek", "effect": "allow" }
+    ]
   }
 }

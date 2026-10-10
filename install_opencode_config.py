@@ -116,16 +116,11 @@ def install_files(user_config_dir: Path, repo_opencode_jsonc: Path, repo_esek_md
             print(f"✅ Saved API key to {env_path}")
     
     if api_key:
-        # Read the JSON file, update the API key, and write back
-        import json
-        with open(user_opencode, 'r', encoding='utf-8') as f:
-            config = json.load(f)
-        
-        if 'providers' in config and 'esek' in config['providers']:
-            config['providers']['esek']['settings']['apiKey'] = api_key
-            with open(user_opencode, 'w', encoding='utf-8') as f:
-                json.dump(config, f, indent=2)
-            print(f"✅ Updated API key in {user_opencode}")
+        config = user_opencode.read_text()
+
+        config = config.replace("<token goes here>", api_key)
+        user_opencode.write_text(config)
+        print(f"✅ Updated API key in {user_opencode}")
     
     # Install agents/esek.md
     user_esek = agents_dir / "esek.md"
