@@ -1,9 +1,10 @@
 This is a repo for all AI-related config files for members we use at the guild.
 
 To get started, you need to:
-- get a token to access our AI infrastructure (ask Informationschefen)
+- get a token & account to access our AI infrastructure (ask Informationschefen)
 - [install OpenCode](https://opencode.ai/) (preferably using your system's package manager if you're on Linux or macOS)
 - [install the config files](#installation)
+- for using the web UI (like ChatGPT), log into <https://chat.esek.se> with the account credentials you received from Informationschefen
 - _optional: install the VSCode extension for OpenCode_
 
 # AI tips

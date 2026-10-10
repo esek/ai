@@ -1,0 +1,15 @@
+version: 1.3.5
+  
+endpoints:
+  custom:
+    - name: "E-sektionens AI"
+      apiKey: "user_provided"
+      baseURL: "https://ai.esek.se/v1"
+      models:
+        default:
+          - "mistral-small"
+          - "mistral-large"
+        fetch: true
+      titleConvo: true
+      titleModel: "mistral-small"
+      modelDisplayLabel: "Mistral"

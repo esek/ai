@@ -1,0 +1,23 @@
+model_list:
+  - model_name: mistral-small
+    litellm_params:
+      model: mistral/mistral-small-latest
+      api_key: os.environ/MISTRAL_API_KEY
+      api_base: os.environ/MISTRAL_API_BASE
+
+  - model_name: mistral-large
+    litellm_params:
+      model: mistral/mistral-large-4
+      api_key: os.environ/MISTRAL_API_KEY
+      api_base: os.environ/MISTRAL_API_BASE
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+  disable_env_credential_login: true
+
+litellm_settings:
+  drop_params: true
+  default_key_generate_params:
+    max_budget: 5
+    budget_duration: "30d"
+    models: ["mistral-small", "mistral-large"]

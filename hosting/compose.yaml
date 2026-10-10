@@ -1,0 +1,28 @@
+include:
+  - compose.librechat.yaml
+
+networks:
+  traefik:
+    external: true
+
+services:
+  litellm:
+    image: docker.litellm.ai/berriai/litellm:latest
+    command: --config /app/config.yaml
+    container_name: litellm
+    environment:
+      MISTRAL_API_KEY: mstrl_Tdz90MnrFqbrrzAKRcJxNzUgx3feCIU1_2taxSR
+      MISTRAL_API_BASE: https://api.eu.mistral.ai/
+      LITELLM_MASTER_KEY: 480ebef8-5f6b-4e35-9556-f2af992a759e
+      DATABASE_URL: postgres://litellm:DPyg4uKVnunWF6UyPwNT@phil.lan.esek.se/litellm
+    networks:
+      - traefik
+        #ports:
+        #- "4000:4000"
+    expose:
+      - 4000
+    volumes:
+      - ./litellm_config.yaml:/app/config.yaml
+    labels:
+      traefik.http.services.litellm.loadbalancer.server.port: 4000
+      traefik.http.routers.litellm.rule: Host(`ai.esek.se`)
