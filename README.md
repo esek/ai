@@ -7,6 +7,8 @@ To get started, you need to:
 - for using the web UI (like ChatGPT), log into <https://chat.esek.se> with the account credentials you received from Informationschefen
 - _optional: install the VSCode extension for OpenCode_
 
+Log into <https://ai.esek.se/ui/> using `usage@esek.se` and `'YlS}j<N}QvIA'Z\1+5C` to see the usage of your account.
+
 # AI tips
 
 ## What costs money?
