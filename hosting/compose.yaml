@@ -11,10 +11,10 @@ services:
     command: --config /app/config.yaml
     container_name: litellm
     environment:
-      MISTRAL_API_KEY: mstrl_Tdz90MnrFqbrrzAKRcJxNzUgx3feCIU1_2taxSR
+      MISTRAL_API_KEY: pls no leak
       MISTRAL_API_BASE: https://api.eu.mistral.ai/
-      LITELLM_MASTER_KEY: 480ebef8-5f6b-4e35-9556-f2af992a759e
-      DATABASE_URL: postgres://litellm:DPyg4uKVnunWF6UyPwNT@phil.lan.esek.se/litellm
+      LITELLM_MASTER_KEY: pls no leak
+      DATABASE_URL: postgres://postgres:postgres@localhost/litellm
     networks:
       - traefik
         #ports:
