@@ -19,6 +19,14 @@ At the fundamental level, tokens cost money. Output tokens (what the AI writes (
 
 A single request to the AI API is made between each tool call (tool call: reading file, searching, web, writing file, running script). In every request, it sends the whole context (conversation / session) to the AI API. The conversation has been cached by the AI API but still costs a bit of money. With long contexts (>128K), most money is spent on these "cached tokens". For my codex usage, I had 3x more cost in cached tokens than input/output tokens. Therefore, it's important to create new sessions when you no longer need the context. Compacting the context is also a really useful tool. Models with shorter context is available to get auto-compaction sooner. Keeping the context short is also useful (which we try to achieve in the system prompt as mentioned above).
 
+## Agent discovery
+
+The biggest problem with LLMs is that they don't have the same intuition for the codebase that we have. To simulate that, it can be very useful to ask the agent to look through the project thoroughly and write it's findings about the structure and common patterns to the `AGENTS.md` file (`CLAUDE.md` if you're a sucker for Dario (not applicable for this repo (we want the ability of our agents to [shoot innocent children](https://en.wikipedia.org/wiki/Anthropic%E2%80%93United_States_Department_of_Defense_dispute#Dispute) /j))). A command (`/analyze`) is available with this opencode config which does precisely this.
+
+If you're starting work in a project without that information in the `AGENTS.md` file, I'd suggest running that command. Running it periodically could be good also.
+
+What this basically does it feed the context when it starts with some very useful information about the project, which makes it have something similar to that intuition we humans have.
+
 ## Prompt "engineering"
 
 Look in the system prompt of the `esek.md` file for inspiration, but we try to keep all the "prompt engineering" in that so we don't have to retype it each session:)

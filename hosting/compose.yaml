@@ -10,10 +10,9 @@ services:
     image: docker.litellm.ai/berriai/litellm:latest
     command: --config /app/config.yaml
     container_name: litellm
+    env_file:
+      - ./.env
     environment:
-      MISTRAL_API_KEY: pls no leak
-      MISTRAL_API_BASE: https://api.eu.mistral.ai/
-      LITELLM_MASTER_KEY: pls no leak
       DATABASE_URL: postgres://postgres:postgres@localhost/litellm
     networks:
       - traefik

@@ -1,7 +1,7 @@
 ---
 description: E-sektionens AI kodare
 mode: primary
-model: esek/small
+model: esek/eu-cheap
 permission:
   edit: allow
   question: allow

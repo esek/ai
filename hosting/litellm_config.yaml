@@ -11,13 +11,51 @@ model_list:
       api_key: os.environ/MISTRAL_API_KEY
       api_base: os.environ/MISTRAL_API_BASE
 
+  # Real model names (base models)
+  - model_name: deepseek-v4.1-flash
+    litellm_params:
+      model: openrouter/deepseek/deepseek-v4.1-flash
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: os.environ/OR_GLOBAL_API_BASE
+      extra_body:
+        provider:
+          order: ["open-inference"]
+
+  - model_name: gpt-6.1-luna
+    litellm_params:
+      model: openrouter/openai/gpt-6.1-luna
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: os.environ/OR_EU_API_BASE
+      extra_body:
+        provider:
+          order: ["azure/eu"]
+
+  - model_name: claude-opus-5.5
+    litellm_params:
+      model: openrouter/anthropic/claude-opus-5.5
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: os.environ/OR_EU_API_BASE
+      extra_body:
+        # OpenRouter automatic caching advances with the conversation (5-minute TTL).
+        cache_control:
+          type: ephemeral
+        provider:
+          order: ["google-vertex/europe"]
+
 general_settings:
   master_key: os.environ/LITELLM_MASTER_KEY
   disable_env_credential_login: true
+
+router_settings:
+  model_group_alias:
+    external-cheap: deepseek-v4.1-flash
+    eu-cheap: mistral-small
+    eu-medium: gpt-6.1-luna
+    eu-expensive: claude-opus-5.5
 
 litellm_settings:
   drop_params: true
   default_key_generate_params:
     max_budget: 5
     budget_duration: "30d"
-    models: ["mistral-small", "mistral-large"]
+    models: []
