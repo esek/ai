@@ -16,12 +16,6 @@
           "limit": {"context": 256000, "output": 16384},
           "settings": {"reasoningEffort": "high"}
         },
-        "eu-cheap": {
-          "modelID": "eu-cheap",
-          "name": "esek: Default cheap model (currently Mistral Small 4)",
-          "limit": {"context": 1000000, "output": 16384},
-          "settings": {"reasoningEffort": "low"}
-        },
         "mistral-large": {
           "modelID": "mistral-large",
           "name": "esek: Mistral Large 4",
@@ -34,29 +28,35 @@
           "limit": {"context": 1000000, "output": 16384},
           "settings": {"reasoningEffort": "high"}
         },
-        "external-cheap": {
-          "modelID": "external-cheap",
-          "name": "esek: Default cheap non-EU model (currently DeepSeek 4.1 Flash by OpenInference) (non-EU!)",
-          "limit": {"context": 1000000, "output": 16384},
-          "settings": {"reasoningEffort": "low"}
-        },
-        "gpt-6.1-sol": {
-          "modelID": "gpt-6.1-luna",
-          "name": "esek: GPT 6.1 Luna",
+        "gpt-6-luna": {
+          "modelID": "gpt-6-luna",
+          "name": "esek: GPT 6 Luna",
           "limit": {"context": 1000000, "output": 16384},
           "settings": {"reasoningEffort": "high"}
-        },
-        "eu-medium": {
-          "modelID": "eu-medium",
-          "name": "esek: Default middle model (currently GPT 6.1 sol)",
-          "limit": {"context": 1000000, "output": 16384},
-          "settings": {"reasoningEffort": "low"}
         },
         "claude-opus-5.5": {
           "modelID": "claude-opus-5.5",
           "name": "esek: Claude Opus 5.5",
           "limit": {"context": 1000000, "output": 16384},
           "settings": {"reasoningEffort": "low"}
+        },
+        "external-cheap": {
+          "modelID": "external-cheap",
+          "name": "esek: Default cheap non-EU model (currently DeepSeek 4.1 Flash) (non-EU!)",
+          "limit": {"context": 1000000, "output": 16384},
+          "settings": {"reasoningEffort": "high"}
+        },
+        "eu-cheap": {
+          "modelID": "eu-cheap",
+          "name": "esek: Default cheap model (currently GPT 6 Luna)",
+          "limit": {"context": 1000000, "output": 16384},
+          "settings": {"reasoningEffort": "medium"}
+        },
+        "eu-medium": {
+          "modelID": "eu-medium",
+          "name": "esek: Default middle model (currently GPT 6 Luna)",
+          "limit": {"context": 1000000, "output": 16384},
+          "settings": {"reasoningEffort": "high"}
         },
         "eu-expensive": {
           "modelID": "eu-expensive",

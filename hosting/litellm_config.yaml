@@ -14,16 +14,16 @@ model_list:
   # Real model names (base models)
   - model_name: deepseek-v4.1-flash
     litellm_params:
-      model: openrouter/deepseek/deepseek-v4.1-flash
+      model: openrouter/deepseek/deepseek-v4.1-flash-1017
       api_key: os.environ/OPENROUTER_API_KEY
       api_base: os.environ/OR_GLOBAL_API_BASE
       extra_body:
         provider:
-          order: ["open-inference"]
+          order: ["cloudflare"]
 
-  - model_name: gpt-6.1-luna
+  - model_name: gpt-6-luna
     litellm_params:
-      model: openrouter/openai/gpt-6.1-luna
+      model: openrouter/openai/gpt-6-luna
       api_key: os.environ/OPENROUTER_API_KEY
       api_base: os.environ/OR_EU_API_BASE
       extra_body:
@@ -49,8 +49,8 @@ general_settings:
 router_settings:
   model_group_alias:
     external-cheap: deepseek-v4.1-flash
-    eu-cheap: mistral-small
-    eu-medium: gpt-6.1-luna
+    eu-cheap: gpt-6-luna
+    eu-medium: gpt-6-luna
     eu-expensive: claude-opus-5.5
 
 litellm_settings:

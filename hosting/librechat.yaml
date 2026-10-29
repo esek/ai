@@ -7,9 +7,8 @@ endpoints:
       baseURL: "https://ai.esek.se/v1"
       models:
         default:
-          - "mistral-small"
-          - "mistral-large"
+          - "eu-cheap"
         fetch: true
       titleConvo: true
-      titleModel: "mistral-small"
-      modelDisplayLabel: "Mistral"
+      titleModel: "eu-cheap"
+      modelDisplayLabel: "E-sektionens AI"
