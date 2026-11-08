@@ -10,18 +10,6 @@
         "apiKey": "<token goes here>"
       },
       "models": {
-        "mistral-small": {
-          "modelID": "mistral-small",
-          "name": "esek: Mistral Small 4",
-          "limit": {"context": 256000, "output": 16384},
-          "settings": {"reasoningEffort": "high"}
-        },
-        "mistral-large": {
-          "modelID": "mistral-large",
-          "name": "esek: Mistral Large 4",
-          "limit": {"context": 1000000, "output": 16384},
-          "settings": {"reasoningEffort": "low"}
-        },
         "deepseek-v4.1-flash": {
           "modelID": "deepseek-v4.1-flash",
           "name": "esek: DeepSeek V4.1 Flash (non-EU!)",
@@ -34,9 +22,15 @@
           "limit": {"context": 1000000, "output": 16384},
           "settings": {"reasoningEffort": "high"}
         },
-        "claude-opus-5.5": {
-          "modelID": "claude-opus-5.5",
-          "name": "esek: Claude Opus 5.5",
+        "claude-haiku-5.5": {
+          "modelID": "claude-haiku-5.5",
+          "name": "esek: Claude Haiku 5.5",
+          "limit": {"context": 1000000, "output": 16384},
+          "settings": {"reasoningEffort": "high"}
+        },
+        "gpt-6.1-terra": {
+          "modelID": "gpt-6.1-terra",
+          "name": "esek: GPT 6.1 Terra",
           "limit": {"context": 1000000, "output": 16384},
           "settings": {"reasoningEffort": "low"}
         },
@@ -54,13 +48,13 @@
         },
         "eu-medium": {
           "modelID": "eu-medium",
-          "name": "esek: Default middle model (currently GPT 6 Luna)",
+          "name": "esek: Default middle model (currently Claude Haiku 5.5)",
           "limit": {"context": 1000000, "output": 16384},
           "settings": {"reasoningEffort": "high"}
         },
         "eu-expensive": {
           "modelID": "eu-expensive",
-          "name": "esek: Default expensive model (currently Opus 5.5)",
+          "name": "esek: Default expensive model (currently GPT 6.1 Terra)",
           "limit": {"context": 1000000, "output": 16384},
           "settings": {"reasoningEffort": "low"}
         }

@@ -16,8 +16,8 @@ Added OpenRouter support to litellm_config.yaml with the following models:
 
 ### Configuration Details:
 - OpenRouter models use `OPENROUTER_API_KEY` environment variable
-- EU endpoints use `https://eu.openrouter.ai/api/v1` (via `OC_EU_API_BASE` env var)
-- Global OpenRouter endpoint uses `https://openrouter.ai/api/v1` (via `OC_GLOBAL_API_BASE` env var)
+- EU endpoints use `https://eu.openrouter.ai/api/v1` (via `OR_EU_API_BASE` env var)
+- Global OpenRouter endpoint uses `https://openrouter.ai/api/v1` (via `OR_GLOBAL_API_BASE` env var)
 - All models added alongside existing Mistral models (not replacing them)
 - Models included in default_key_generate_params budget tracking
 - Real model names aliased via `router_settings.model_group_alias` in litellm_config.yaml

@@ -1,16 +1,4 @@
 model_list:
-  - model_name: mistral-small
-    litellm_params:
-      model: mistral/mistral-small-latest
-      api_key: os.environ/MISTRAL_API_KEY
-      api_base: os.environ/MISTRAL_API_BASE
-
-  - model_name: mistral-large
-    litellm_params:
-      model: mistral/mistral-large-4
-      api_key: os.environ/MISTRAL_API_KEY
-      api_base: os.environ/MISTRAL_API_BASE
-
   # Real model names (base models)
   - model_name: deepseek-v4.1-flash
     litellm_params:
@@ -19,7 +7,7 @@ model_list:
       api_base: os.environ/OR_GLOBAL_API_BASE
       extra_body:
         provider:
-          order: ["cloudflare"]
+          order: ["particle-ai/us/flex", "openinference", "cloudflare"]
 
   - model_name: gpt-6-luna
     litellm_params:
@@ -30,9 +18,9 @@ model_list:
         provider:
           order: ["azure/eu"]
 
-  - model_name: claude-opus-5.5
+  - model_name: claude-haiku-5.5
     litellm_params:
-      model: openrouter/anthropic/claude-opus-5.5
+      model: openrouter/anthropic/claude-haiku-5.5
       api_key: os.environ/OPENROUTER_API_KEY
       api_base: os.environ/OR_EU_API_BASE
       extra_body:
@@ -42,6 +30,15 @@ model_list:
         provider:
           order: ["google-vertex/europe"]
 
+  - model_name: gpt-6.1-terra
+    litellm_params:
+      model: openrouter/openai/gpt-6.1-terra
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: os.environ/OR_EU_API_BASE
+      extra_body:
+        provider:
+          order: ["azure/eu"]
+
 general_settings:
   master_key: os.environ/LITELLM_MASTER_KEY
   disable_env_credential_login: true
@@ -50,8 +47,8 @@ router_settings:
   model_group_alias:
     external-cheap: deepseek-v4.1-flash
     eu-cheap: gpt-6-luna
-    eu-medium: gpt-6-luna
-    eu-expensive: claude-opus-5.5
+    eu-medium: claude-haiku-5.5
+    eu-expensive: gpt-6.1-terra
 
 litellm_settings:
   drop_params: true
