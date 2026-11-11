@@ -58,6 +58,36 @@ mkdir -p ~/.config/opencode/agents
 cp agents/esek.md ~/.config/opencode/agents/
 ```
 
+#### NixOS
+
+This repository has a nix flake which exposes all files.
+
+```nix
+inputs.esek-ai.url = "github:esek/ai";
+```
+
+Home-manager example using flake-parts
+```nix
+  flake.homeModules.opencode =
+    {
+      pkgs,
+      lib,
+      inputs,
+      ...
+    }:
+    let
+      ai-source = inputs.esek-ai.source;
+    in
+    {
+      programs.opencode = {
+        enable = true;
+        settings = builtins.fromJSON ( builtins.replaceStrings ["<token goes here>"] [(builtins.replaceStrings ["\n"] [""] (builtins.readFile /secrets/esek/opencode.key))] (builtins.readFile (ai-source + "/opencode-template.jsonc")) );
+        agents = ai-source + "/agents";
+        commands = ai-source + "/commands";
+      };
+    };
+```
+
 ### Windows (PowerShell)
 
 ```powershell
