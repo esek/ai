@@ -2,12 +2,12 @@ model_list:
   # Real model names (base models)
   - model_name: deepseek-v4.1-flash
     litellm_params:
-      model: openrouter/deepseek/deepseek-v4.1-flash-1017
+      model: openrouter/deepseek/deepseek-v4.1-flash-1017:floor
       api_key: os.environ/OPENROUTER_API_KEY
       api_base: os.environ/OR_GLOBAL_API_BASE
       extra_body:
         provider:
-          order: ["particle-ai/us/flex", "openinference", "cloudflare"]
+          zdr: true
 
   - model_name: gpt-6-luna
     litellm_params:
